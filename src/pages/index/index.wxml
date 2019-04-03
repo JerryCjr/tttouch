@@ -1,0 +1,14 @@
+<view class="page-section">
+  <movable-area>
+    <movable-view
+      damping='100'
+      direction="all"
+      bind:touchstart="tshandler"
+      bind:touchmove="tmhandler"
+      bind:touchend="tehandler"
+      x = '{{ x }}'
+      y = '{{ y }}'
+    >
+    </movable-view>
+  </movable-area>
+</view>
