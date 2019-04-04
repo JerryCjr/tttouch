@@ -1,6 +1,6 @@
 {
   "name": "tttouch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "宝玩小程序开发模板",
   "main": "miniprogram_dist/index.js",
   "scripts": {

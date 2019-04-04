@@ -4,23 +4,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-    x: 0,
-    y: 0,
-    tsX: 0
+    list: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
-    console.log('onLoad');
+    this.refresh();
+  },
+
+  getRandomColor() {
+    return '#' + (Math.random() * 0xffffff << 0).toString(16);
+  },
+
+  refresh() {
+    const fetch = [];
+    for (let index = 0; index < 10; index++) {
+      const element = {
+        id: index,
+        tsX: 0,
+        x: 0,
+        y: 0,
+        color: this.getRandomColor()
+      };
+      fetch.push(element);
+    };
+
+    this.setData({
+      list: fetch.reverse()
+    });
   },
 
   tshandler(e) {
     // console.log(e);
+    const target = e.target.id;
     const tsX = e.changedTouches[0]['pageX'];
+    const key = `list[${target}].tsX`;
     this.setData({
-      tsX
+      [key]: tsX
     });
   },
 
@@ -30,29 +52,28 @@ Page({
 
   tehandler(e) {
     // console.log(e);
+    const target = e.target.id;
     const teX = e.changedTouches[0]['pageX'];
-    const offset = teX - this.data.tsX;
-
-    // console.log('start: ', this.data.tsX);
+    const tsX = this.data.list[target].tsX;
+    const key = `list[${target}].x`;
+    const offset = teX - tsX;
+    // console.log('start: ', tsX);
     // console.log('end: ', teX);
     console.log('offset: ', offset);
 
     if (offset < -100) {
       console.log('towards left');
       this.setData({
-        x: -1000,
-        y: 0
+        [key]: -1000
       });
     } else if (offset > 100) {
       console.log('towards right');
       this.setData({
-        x: 1000,
-        y: 0
+        [key]: 1000
       });
     } else {
       this.setData({
-        x: 0,
-        y: 0
+        [key]: 0
       });
     }
   },

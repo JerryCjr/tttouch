@@ -67,7 +67,7 @@ const js = async () => {
       fix: true
     }))
     .pipe(eslint.format())
-    // .pipe(eslint.failAfterError())
+    .pipe(eslint.failAfterError())
     .pipe(dest(distPath));
 };
 // audio

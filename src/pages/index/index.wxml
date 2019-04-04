@@ -1,14 +1,19 @@
 <view class="page-section">
   <movable-area>
     <movable-view
-      damping='100'
+      damping="100"
       direction="all"
+      wx:for = "{{ list }}" wx:for-index="index" wx:for-item="item" wx:key="item.id"
+      x = "{{ item.x }}"
+      y = "{{ item.y }}"
+      style = "background-color: {{ item.color }}"
       bind:touchstart="tshandler"
       bind:touchmove="tmhandler"
       bind:touchend="tehandler"
-      x = '{{ x }}'
-      y = '{{ y }}'
+      id="{{ index }}"
     >
     </movable-view>
   </movable-area>
+
+  <cover-view class="refresh" bind:tap="refresh">refresh</cover-view>
 </view>
